@@ -23,6 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CB22823D2799C84A00115B8C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CB3077FB2795368000928221 /* Assignment_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB3077FE2795368000928221 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,6 +42,7 @@
 		CB3077F22795368000928221 = {
 			isa = PBXGroup;
 			children = (
+				CB22823D2799C84A00115B8C /* .gitignore */,
 				CB3077FD2795368000928221 /* Assignment_1 */,
 				CB3077FC2795368000928221 /* Products */,
 			);
