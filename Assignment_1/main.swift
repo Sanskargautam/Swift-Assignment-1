@@ -45,7 +45,7 @@ class ImportedTax : Tax
     }
 }
 
-class userDetail
+class itemDetail
 {
     private let name: String?
     private let quantity: Int
@@ -58,16 +58,6 @@ class userDetail
         self.quantity = quantity
         self.price = price
         self.type = type
-    }
-    
-    func getTotalPrice(tax : Double) -> Double
-    {
-        return (tax + self.price!)
-    }
-    
-    func getOverAllPrice(tax : Double) -> Double
-    {
-        return ((tax + self.price!) * (Double)(self.quantity))
     }
     
     func getTax(price : Double) -> Double
@@ -99,8 +89,8 @@ class userDetail
         Swift.print("Quantity  :  \(self.quantity)")
         Swift.print("Type  :  \(self.type!)")
         Swift.print("Tax  :  \(tax)")
-        Swift.print("Total price  :  \(getTotalPrice(tax: tax))")
-        Swift.print("Total price * Quantity  :  \(getOverAllPrice(tax: tax))")
+        Swift.print("Total price  :  \(tax + self.price!)")
+        Swift.print("Total price * Quantity  :  \((tax + self.price!) * (Double)(self.quantity))")
 
         print()
         Swift.print("-------------------------------------------------")
@@ -108,7 +98,7 @@ class userDetail
 }
 
 
-var detailsOfAllItems = [userDetail]() //array of object to store details of all users
+var detailsOfAllItems = [itemDetail]() //array of object to store details of all users
 
 func takeInput() -> ()
 {
@@ -233,7 +223,7 @@ func takeInput() -> ()
             return
         }
     
-        let user = userDetail(name , quantity , price! , type!)
+        let user = itemDetail(name , quantity , price! , type!)
         detailsOfAllItems.append(user)
     }
     else
