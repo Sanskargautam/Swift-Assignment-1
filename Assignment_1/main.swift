@@ -112,15 +112,15 @@ func takeInput() -> ()
     
     if let inputValue = value // for having a input
     {
-        let userInputArray = inputValue.components(separatedBy: " ") //separating input string words by white spaces
+        let itemInputArray = inputValue.components(separatedBy: " ") //separating input string words by white spaces
         
-        if(userInputArray[0] != "-name")
+        if(itemInputArray[0] != "-name")
         {
             print(" \(wrongInput) : First value should be -name ")
             return
         }
         
-        if(userInputArray.count == 1) // if after -name nothing present
+        if(itemInputArray.count == 1) // if after -name nothing present
         {
             print(wrongInput)
             return
@@ -128,34 +128,34 @@ func takeInput() -> ()
         
         var indexAfterName:Int = 0
         
-        if(userInputArray[1].first == "-") // if second word start with - rather than name
+        if(itemInputArray[1].first == "-") // if second word start with - rather than name
         {
             print(" \(wrongInput) : Enter proper name ")
             return
         }
         
-        for index in 2..<userInputArray.count // getting name of item "name can be of multiple words"
+        for index in 2..<itemInputArray.count // getting name of item "name can be of multiple words"
         {
-            if let firstChar = userInputArray[index].first
+            if let firstChar = itemInputArray[index].first
             {
                 if(firstChar == "-")
                 {
                     indexAfterName = index
                     for counter in 1..<index
                     {
-                        name += userInputArray[counter]
+                        name += itemInputArray[counter]
                     }
                     break
                 }
             }
         }
         
-        for index in stride(from: indexAfterName , to: userInputArray.count - 1, by: 2)
+        for index in stride(from: indexAfterName , to: itemInputArray.count - 1, by: 2)
         {
-            switch userInputArray[index]
+            switch itemInputArray[index]
             {
                 case "-quantity":
-                    if let quantityValue = (Int)(userInputArray[index+1])
+                    if let quantityValue = (Int)(itemInputArray[index+1])
                     {
                         if(quantityValue <= 0)
                         {
@@ -171,7 +171,7 @@ func takeInput() -> ()
                     }
                 
                 case "-price":
-                    if let priceValue = (Double)(userInputArray[index+1])
+                    if let priceValue = (Double)(itemInputArray[index+1])
                     {
                         price = priceValue
                     }
@@ -182,7 +182,7 @@ func takeInput() -> ()
                     }
             
                 case "-type":
-                    guard(userInputArray[index+1] == "raw" || userInputArray[index+1] == "manufactured" || userInputArray[index+1] == "imported")
+                    guard(itemInputArray[index+1] == "raw" || itemInputArray[index+1] == "manufactured" || itemInputArray[index+1] == "imported")
                     else
                     {
                         print("""
@@ -190,7 +190,7 @@ func takeInput() -> ()
                             """)
                         return
                     }
-                    type = (userInputArray[index+1])
+                    type = (itemInputArray[index+1])
                 
                 
                 default:
