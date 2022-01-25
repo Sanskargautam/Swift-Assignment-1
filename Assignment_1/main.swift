@@ -7,90 +7,7 @@
 //
 import Foundation
 
-protocol Tax
-{
-    func getType() -> String
-    func calculateTax() -> Double
-}
-
-class ItemDetails
-{
-    var name: String
-    var quantity: Int
-    var price: Double
-    
-    init(_ name:String, _ quantity:Int, _ price:Double)
-    {
-        self.name = name
-        self.quantity = quantity
-        self.price = price
-    }
-}
-
-class RawTax : ItemDetails, Tax
-{
-    override init(_ name:String,_ quantity:Int,_ price:Double)
-    {
-        super.init(name, quantity, price)
-    }
-    
-    func getType() -> String
-    {
-        return "raw"
-    }
-    
-    func calculateTax() -> Double
-    {
-        return (0.125 * price)
-    }
-}
-
-class ManufacturedTax : ItemDetails, Tax
-{
-    override init(_ name:String,_ quantity:Int,_ price:Double)
-    {
-        super.init(name, quantity, price)
-    }
-    
-    func getType() -> String
-    {
-        return "manufactured"
-    }
-    
-    func calculateTax() -> Double
-    {
-        return (0.125 * price + (0.02 * (price + (0.125 * price))))
-    }
-}
-
-class ImportedTax : ItemDetails, Tax
-{
-    override init(_ name:String,_ quantity:Int,_ price:Double)
-    {
-        super.init(name, quantity, price)
-    }
-    
-    func getType() -> String
-    {
-        return "imported"
-    }
-    
-    func calculateTax() -> Double
-    {
-        let finalCost : Double = (0.01 * price) + price
-        if( finalCost > 200)
-        {
-            return ((0.05 * finalCost) - price )
-        }
-        else if( finalCost > 100)
-        {
-            return (finalCost + 10 - price)
-        }
-        return (finalCost + 5 - price )
-    }
-}
-
-var detailsOfAllItems = [ItemDetails & Tax]() //array of object to store details of all item
+var detailsOfAllItems = [Items & Tax]() //array of object to store details of all item
 
 func takeInput() -> ()
 {
@@ -159,7 +76,7 @@ func takeInput() -> ()
                     {
                         if(quantityValue <= 0)
                         {
-                            print("Invalid Quantity")
+                            print("\(wrongInput) :Invalid Quantity")
                             return
                         }
                         quantity = quantityValue
@@ -218,19 +135,19 @@ func takeInput() -> ()
         switch type
         {
             case "raw":
-                let rawItem = RawTax(name, quantity, price!)
+                let rawItem = RawItem(name, quantity, price!)
                 detailsOfAllItems.append(rawItem)
                 
             case "manufactured":
-                let manufacteredItem = ManufacturedTax(name, quantity, price!)
+                let manufacteredItem = ManufacturedItem(name, quantity, price!)
                 detailsOfAllItems.append(manufacteredItem)
                 
             case "imported":
-                let importedItem = ImportedTax(name, quantity, price!)
+                let importedItem = ImportedItem(name, quantity, price!)
                 detailsOfAllItems.append(importedItem)
                 
             default:
-                print("INVALID INPUT")
+            print(wrongInput)
         }
         
     }
@@ -258,15 +175,7 @@ func main()
     
     for item in detailsOfAllItems//calling all objects containing details of item to print
     {
-        Swift.print("Name  :  \(item.name)")
-        Swift.print("Price  :  \(item.price)")
-        Swift.print("Quantity  :  \(item.quantity)")
-        Swift.print("Type  :  \(item.getType())")
-        Swift.print("Tax  :  \(item.calculateTax())")
-        Swift.print("Total price  :  \(item.calculateTax() + item.price)")
-
-        print()
-        Swift.print("-------------------------------------------------")
+        item.print()
     }
 }
 
